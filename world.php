@@ -14,13 +14,19 @@ if($_GET["context"] == "country") {
   if($_GET["country"]) {
     $country = filter_var($_GET["country"], FILTER_SANITIZE_STRING);
     $stmt = $conn->query("SELECT * FROM countries WHERE name LIKE '%$country%'");
+  } else{
+    $stmt = $conn->query("SELECT * FROM countries");
   }
   
-} else {
+} else if($_GET["context"] == "city") {
   
   if($_GET["country"]) {
     $country = filter_var($_GET["country"], FILTER_SANITIZE_STRING);
     $stmt = $conn->query("SELECT cities.name, cities.district, cities.population FROM cities INNER JOIN countries ON cities.country_code=countries.code WHERE countries.name LIKE '%$country%';");
+  } else{
+    $stmt = $conn->query("SELECT cities.name AS name, cities.district AS district, 
+    cities.population AS population FROM cities 
+     ");
   }
 
 }
@@ -33,8 +39,9 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <table>
   <tr>
     <th>Country</th>
-    <th>Country Code</th>
-    <th>Capital</th>
+    <th>Continent</th>
+    <th>Independence</th>
+    <th>Head of State</th>
   </tr>
 
   <?php foreach ($results as $row): ?>
