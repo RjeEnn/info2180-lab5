@@ -29,8 +29,9 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <?php foreach ($results as $row): ?>
     <tr>
       <td><?= $row['name'] ?></td>
-      <td><?= $row['code'] ?></td>
-      <td><?= $row['capital'] ?></td>
+      <td><?= $row['continent'] ?></td>
+      <td><?= $row['independence_year'] ?></td>
+      <td><?= $row['head_of_state'] ?></td>
     </tr>
   <?php endforeach; ?>
 </table>
